@@ -1,15 +1,15 @@
-SRC         =     smartCalcMvc/model/parser.cc smartCalcMvc/model/calculate.cc smartCalcMvc/model/validator.cc smartCalcMvc/model/graphBuilder.cc smartCalcMvc/model/creditModel.cc smartCalcMvc/model/deposit.cc
+SRC         =     $(foreach dir, $(SOURCEDIR), $(wildcard $(dir)/*.cc))
 CC          =     g++ -std=c++17
 LIBCHECK    =     -lgtest
-TESTF       =     test.cc smartCalcMvc/model/parser.cc smartCalcMvc/model/calculate.cc smartCalcMvc/controller/controller.cc smartCalcMvc/model/validator.cc smartCalcMvc/model/graphBuilder.cc smartCalcMvc/model/creditModel.cc smartCalcMvc/model/deposit.cc
-PUSHCOMMENT =     "finish"
+TESTF       =     test.cc $(SRC)
 OS          =     $(shell uname -s)
+SOURCEDIR   =     smartCalcMvc/model/
 
 .PHONY:
 	clean rebuild test leaks all default
 
 clean:
-	rm -rf *.txt test model_matrix_oop valgrind leaks *.dSYM *.out *.cfg
+	rm -rf *.txt test valgrind leaks *.dSYM *.out *.cfg
 	rm -rf *.gcno *.gcda *.gcov *.info report .clang-format main
 	rm -rf *.o *.a
 
@@ -37,7 +37,6 @@ gcov_report: test
 	lcov -t "test" --no-external -o test.info -c -d ./
 	genhtml -o report test.info
 	open report/index.html
-
 
 leaks: clean
 	$(CC) $(LIBCHECK) test.cc $(SRC) -o leaks 
