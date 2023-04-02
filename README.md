@@ -1,4 +1,3 @@
-   Documentation SmartCalc 
 
 Documentation SmartCalc
 =============================
