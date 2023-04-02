@@ -50,7 +50,7 @@ Main Calculator
 
 ### HOW TO USE:
 
-### Entering x(min) and x(max) will set the range of the graph on the x-axis, entering **X** will set a point on the X-axis, entering **Y** will set a point on the Y-axis.Clicking on **custom** will clear your fields, clicking on **example** will set an example for a quick test of the Graph Builder utility
+ Entering x(min) and x(max) will set the range of the graph on the x-axis, entering **X** will set a point on the X-axis, entering **Y** will set a point on the Y-axis.Clicking on **custom** will clear your fields, clicking on **example** will set an example for a quick test of the Graph Builder utility
 
 Credit Calculator
 -----------------
@@ -61,15 +61,15 @@ Credit Calculator
 
 ### HOW TO USE:
 
-### At the entrance there are three parameters: the loan amount, term for which the loan is taken (in months), the interest rate, in accordance with these parameters and depending on the type of credit you selected, your repayment plan will be calculated.
+ At the entrance there are three parameters: the loan amount, term for which the loan is taken (in months), the interest rate, in accordance with these parameters and depending on the type of credit you selected, your repayment plan will be calculated.
 
 Deposit Calculator
 ------------------
 
-### deposit calculator - suitable for calculating deposits for a certain period, the functionality allows you to add and subtract from the principal amount, there is interest capitalization.
+ deposit calculator - suitable for calculating deposits for a certain period, the functionality allows you to add and subtract from the principal amount, there is interest capitalization.
 
 ![](images/deposit.png)
 
 ### HOW TO USE:
 
-### Enter all the input data and click the calculate button.
+ Enter all the input data and click the calculate button.
