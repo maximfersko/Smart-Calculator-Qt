@@ -6,6 +6,7 @@ drawPlot::drawPlot(model::controller *controller, QWidget *parent)
     : ui(new Ui::drawPlot), controller_(controller) {
     ui->setupUi(this);
     setAttribute(Qt::WA_DeleteOnClose);
+    this->setWindowTitle("Draw Plot");
 }
 
 drawPlot::~drawPlot() { delete ui; }

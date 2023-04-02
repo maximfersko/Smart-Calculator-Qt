@@ -8,6 +8,7 @@ depositcalc::depositcalc(model::controller *dep, QWidget *parent) :
 {
     ui->setupUi(this);
         setAttribute(Qt::WA_DeleteOnClose);
+    this->setWindowTitle("Deposit Calculator");
 }
 
 depositcalc::~depositcalc()

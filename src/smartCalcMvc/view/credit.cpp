@@ -9,6 +9,7 @@ credit::credit(model::controller *controller, QWidget *parent)
     ui->overPay->setReadOnly(true);
     ui->totalPay->setReadOnly(true);
     setAttribute(Qt::WA_DeleteOnClose);
+    this->setWindowTitle("Credit Calculator");
 }
 
 credit::~credit() { delete ui; }

@@ -8,6 +8,7 @@ dialogGetX::dialogGetX(QWidget *parent)
     : QWidget(parent), ui(new Ui::dialogGetX) {
     ui->setupUi(this);
     setAttribute(Qt::WA_DeleteOnClose);
+    this->setWindowTitle("Replace X");
 }
 
 dialogGetX::~dialogGetX() { delete ui; }

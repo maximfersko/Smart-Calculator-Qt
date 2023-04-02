@@ -23,12 +23,6 @@ install: uninstall
 uninstall:
 	rm -rf app
 
-
-lint: clean
-	cp ../materials/linters/.clang-format . 
-	clang-format -i --verbose ./*.cc $(SRC)
-	rm -f .clang-format
-
 test: clean
 	$(CC) $(TESTF) $(LIBCHECK) --coverage -o test
 	./test
@@ -41,7 +35,4 @@ gcov_report: test
 leaks: clean
 	$(CC) $(LIBCHECK) test.cc $(SRC) -o leaks 
 	leaks  -atExit -- ./leaks
-
-dvi:
-	open documentation/documentation.html
 

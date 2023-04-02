@@ -10,6 +10,7 @@ MainWindow::MainWindow(model::controller *controller, QWidget *parent)
     init();
     connectButtons();
     creditModel_->hide();
+    this->setWindowTitle("Smart Calculator");
 }
 
 MainWindow::~MainWindow() { delete ui; }
@@ -17,11 +18,8 @@ MainWindow::~MainWindow() { delete ui; }
 void MainWindow::init() {
     this->setWindowTitle("smartCalc v2.0 by gwakame");
     dialog_ = new dialogGetX;
-    dialog_->setWindowTitle("X");
     graph_ = new drawPlot(controller_, this);
-    graph_->setWindowTitle("graph builder");
     creditModel_ = new credit(controller_);
-    creditModel_->setWindowTitle("credit calculator");
     deposit_ = new depositcalc(controller_);
 }
 
