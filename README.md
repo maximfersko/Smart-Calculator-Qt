@@ -3,6 +3,12 @@
 Documentation SmartCalc
 =============================
 
+## Build:
+```bash
+$ cd src
+$ make install
+```
+
 Main Calculator
 ---------------
 
