@@ -63,80 +63,42 @@ void MainWindow::connectButtons() {
 
 void MainWindow::getNumbers() {
     QPushButton *btn = (QPushButton *)sender();
-    if (btn->text() == "0") {
-        ui->input->setText(ui->input->text() + "0");
-    } else if (btn->text() == "1") {
-        ui->input->setText(ui->input->text() + "1");
-    } else if (btn->text() == "2") {
-        ui->input->setText(ui->input->text() + "2");
-    } else if (btn->text() == "3") {
-        ui->input->setText(ui->input->text() + "3");
-    } else if (btn->text() == "4") {
-        ui->input->setText(ui->input->text() + "4");
-    } else if (btn->text() == "5") {
-        ui->input->setText(ui->input->text() + "5");
-    } else if (btn->text() == "6") {
-        ui->input->setText(ui->input->text() + "6");
-    } else if (btn->text() == "7") {
-        ui->input->setText(ui->input->text() + "7");
-    } else if (btn->text() == "8") {
-        ui->input->setText(ui->input->text() + "8");
-    } else if (btn->text() == "9") {
-        ui->input->setText(ui->input->text() + "9");
-    } else if (btn->text() == "p") {
-        ui->input->setText(ui->input->text() + "p");
-    } else if (btn->text() == "e") {
-        ui->input->setText(ui->input->text() + "e");
-    } else if (btn->text() == "x") {
-        ui->input->setText(ui->input->text() + "x");
+    QMap<QString, QString> buttonMap = {
+        {"0", "0"}, {"1", "1"}, {"2", "2"}, {"3", "3"}, {"4", "4"},
+        {"5", "5"}, {"6", "6"}, {"7", "7"}, {"8", "8"}, {"9", "9"},
+        {"p", "p"}, {"e", "e"}, {"x", "x"}
+    };
+    if (buttonMap.contains(btn->text())) {
+        ui->input->setText(ui->input->text() + buttonMap[btn->text()]);
     }
 }
 
 void MainWindow::operations() {
     QPushButton *button = (QPushButton *)sender();
-    if (button->text() == "+") {
-        ui->input->setText(ui->input->text() + " " + '+' + " ");
-    } else if (button->text() == '-') {
-        ui->input->setText(ui->input->text() + " " + '-' + " ");
-    } else if (button->text() == "﹡") {
-        ui->input->setText(ui->input->text() + " " + "*" + " ");
-    } else if (button->text() == "÷") {
-        ui->input->setText(ui->input->text() + " " + '/' + " ");
-    } else if (button->text() == "(") {
-        ui->input->setText(ui->input->text() + " " + '(' + " ");
-    } else if (button->text() == ")") {
-        ui->input->setText(ui->input->text() + " " + ')' + " ");
-    } else if (button->text() == "^") {
-        ui->input->setText(ui->input->text() + " " + '^' + " ");
+    QMap<QString, QString> buttonMap = {
+        {"+", " + "}, {"-", " - "}, {"﹡", " * "}, {"÷", " / "},
+        {"(", " ( "}, {")", " ) "}, {"^", " ^ "}
+    };
+    if (buttonMap.contains(button->text())) {
+        ui->input->setText(ui->input->text() + buttonMap[button->text()]);
     }
 }
 
 void MainWindow::mathFunc() {
     QPushButton *btn = (QPushButton *)sender();
-    if (btn->text() == "cos") {
-        ui->input->setText(ui->input->text() + "cos(" + " ");
-    } else if (btn->text() == "sin") {
-        ui->input->setText(ui->input->text() + "sin(" + " ");
-    } else if (btn->text() == "acos") {
-        ui->input->setText(ui->input->text() + "acos(" + " ");
-    } else if (btn->text() == "asin") {
-        ui->input->setText(ui->input->text() + "asin(" + " ");
-    } else if (btn->text() == "atan") {
-        ui->input->setText(ui->input->text() + "atan(" + " ");
-    } else if (btn->text() == "tan") {
-        ui->input->setText(ui->input->text() + "tan(" + " ");
-    } else if (btn->text() == "log") {
-        ui->input->setText(ui->input->text() + "log(" + " ");
-    } else if (btn->text() == "ln") {
-        ui->input->setText(ui->input->text() + "ln(" + " ");
-    } else if (btn->text() == "sqrt") {
-        ui->input->setText(ui->input->text() + "sqrt(" + " ");
-    } else if (btn->text() == "mod") {
-        ui->input->setText(ui->input->text() + " " + "%" + " ");
+    QMap<QString, QString> buttonMap = {
+        {"cos", "cos( "}, {"sin", "sin( "}, {"acos", "acos( "},
+        {"asin", "asin( "}, {"atan", "atan( "}, {"tan", "tan( "},
+        {"log", "log( "}, {"ln", "ln( "}, {"sqrt", "sqrt( "},
+        {"mod", " % "}, {"graph", ""}
+    };
+    if (buttonMap.contains(btn->text())) {
+        ui->input->setText(ui->input->text() + buttonMap[btn->text()]);
     } else if (btn->text() == "graph") {
         graph_->show();
     }
 }
+
 
 void MainWindow::on_pushButton_clear_clicked() {
     ui->input->clear();
@@ -145,8 +107,6 @@ void MainWindow::on_pushButton_clear_clicked() {
 }
 
 void MainWindow::on_pushButton_dot_clicked() {
-    if (!(ui->input->text().contains('.')))
-        ui->input->setText(ui->input->text() + ".");
 }
 
 void MainWindow::slotF(QString str) {
@@ -186,7 +146,7 @@ void MainWindow::on_actioncredit_calc_triggered() {
     creditModel_->show();
 }
 
-void MainWindow::on_actionsmartCalc_triggered() {
+void MainWindow::on_actionSmartCalc_triggered() {
     deposit_->hide();
     creditModel_->hide();
     this->show();

@@ -2,7 +2,7 @@
 
 namespace model {
 
-std::pair<std::vector<double>, std::vector<double>> smartCalc::graphBuilder(
+std::pair<std::vector<double>, std::vector<double>> SmartCalc::graphBuilder(
     std::vector<double> &Data, std::string str) {
     std::pair<std::vector<double>, std::vector<double>> result;
     double xMax = Data.back();

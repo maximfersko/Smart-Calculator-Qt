@@ -37,7 +37,7 @@ class MainWindow : public QMainWindow {
     void connectButtons();
     void on_actioncredit_calc_triggered();
     void init();
-    void on_actionsmartCalc_triggered();
+    void on_actionSmartCalc_triggered();
 
     void on_actiondeposit_calc_triggered();
 

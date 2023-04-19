@@ -2,18 +2,18 @@
 
 namespace model {
 
-void smartCalc::check(std::string &str) {
+void SmartCalc::ValidateBrackets(std::string &str) {
     int isBrackets = 0;
     int i = 0;
     while (str[i]) {
         if (str[i] == '(' || str[i] == ')') ++isBrackets;
         ++i;
     }
-    if (isBrackets % 2 != 0) error("Error brackets !");
+    if (isBrackets % 2 != 0) Error("Error brackets !");
 }
 
-void smartCalc::validateRPN(const stackNumber &A) {
-    if (A.front().second == OPERATION) error("Error RPN");
+void SmartCalc::Validate(const number &A) {
+    if (A.front().second == OPERATION) Error("Error RPN");
     if (!A.empty()) {
         int isOperation = 0, isNumber = 0;
         bool Unar = false;
@@ -35,7 +35,7 @@ void smartCalc::validateRPN(const stackNumber &A) {
         }
         if ((isOperation == 0 && isNumber > 0) ||
             (isNumber == 0 && isOperation > 0))
-            error("Invalid expressions !");
+            Error("Invalid expressions !");
 
         // TODO: need fix
         // if (!Unar) {

@@ -11,13 +11,13 @@ class controller {
     using data_t_credit = creditModel::data_c_t_;
 
    private:
-    smartCalc *model_;
+    SmartCalc *model_;
     creditModel *creditModel_;
     deposit *depositModel_;
 
    public:
     controller() : model_(nullptr), creditModel_(nullptr), depositModel_(nullptr) {}
-    controller(smartCalc *model, creditModel *modelCredit, deposit *depositModel);
+    controller(SmartCalc *model, creditModel *modelCredit, deposit *depositModel);
     double RPN(std::string str);
     double RPN(std::string str, double X);
     void clean();

@@ -2,7 +2,7 @@
 
 namespace model {
 
-controller::controller(smartCalc *model, creditModel *modelCredit, deposit *depositModel)
+controller::controller(SmartCalc *model, creditModel *modelCredit, deposit *depositModel)
     : model_(model), creditModel_(modelCredit), depositModel_(depositModel) {}
 
 double controller::RPN(std::string str, double X) {

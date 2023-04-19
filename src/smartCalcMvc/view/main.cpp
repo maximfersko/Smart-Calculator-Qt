@@ -6,7 +6,7 @@ using namespace model;
 
 int main(int argc, char *argv[]) {
     QApplication a(argc, argv);
-    model::smartCalc model;
+    model::SmartCalc model;
     model::creditModel credit;
     model::deposit deposit;
     model::controller controller(&model, &credit, &deposit);

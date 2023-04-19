@@ -36,3 +36,5 @@ leaks: clean
 	$(CC) $(LIBCHECK) test.cc $(SRC) -o leaks 
 	leaks  -atExit -- ./leaks
 
+lint:
+	clang-format -i --verbose $(SRC)

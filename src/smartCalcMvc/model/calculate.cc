@@ -2,95 +2,98 @@
 
 namespace model {
 
-typename smartCalc::data smartCalc::RPN(std::string str) {
-    return getPolishNotationX(str, 0);
+typename SmartCalc::data SmartCalc::RPN(std::string str) {
+    return ComputPolishNotation(str, 0);
 }
 
-typename smartCalc::data smartCalc::RPN(std::string str, data X) {
-    return getPolishNotationX(str, X);
+typename SmartCalc::data SmartCalc::RPN(std::string str, data X) {
+    return ComputPolishNotation(str, X);
 }
 
-void smartCalc::calcBinary(int token) {
-    data resultForCalcBinar = 0, first = 0, second = 0;
-    first = stackRes_.back().first;
-    stackRes_.pop_back();
-    second = stackRes_.back().first;
-    stackRes_.pop_back();
-    if (token == PLUS) {
-        resultForCalcBinar = first + second;
-    } else if (token == MINUS) {
-        resultForCalcBinar = second - first;
-    } else if (token == DIV) {
-        if (first == 0) error("You can't divide by zero");
-        resultForCalcBinar = second / first;
-    } else if (token == MULT) {
-        resultForCalcBinar = first * second;
-    } else if (token == MOD) {
-        resultForCalcBinar = fmod(second, first);
-    } else if (token == POW) {
-        resultForCalcBinar = pow(second, first);
+void SmartCalc::ComputeBinary(int token) {
+    data resultForCalcBinar = 0;
+    auto [first, _] = result_.back();
+    result_.pop_back();
+    auto [second, __] = result_.back();
+    result_.pop_back();
+    switch (token) {
+        case PLUS:
+            resultForCalcBinar = second + first;
+            break;
+        case MINUS:
+            resultForCalcBinar = second - first;
+            break;
+        case DIV:
+            if (first == 0) Error("You can't divide by zero");
+            resultForCalcBinar = second / first;
+            break;
+        case MULT:
+            resultForCalcBinar = first * second;
+            break;
+        case MOD:
+            resultForCalcBinar = fmod(second, first);
+            break;
+        case POW:
+            resultForCalcBinar = pow(second, first);
+            break;
     }
-    stackRes_.push_back(std::make_pair(resultForCalcBinar, NUMBER));
+    result_.push_back({resultForCalcBinar, NUMBER});
 }
 
-void smartCalc::calcUnary(int token) {
-    data number = stackRes_.back().first;
-    stackRes_.pop_back();
-    data resultForCalcUnary = 0;
-    if (token == COS) {
-        resultForCalcUnary = cos(number);
-    } else if (token == SIN) {
-        resultForCalcUnary = sin(number);
-    } else if (token == TAN) {
-        resultForCalcUnary = tan(number);
-    } else if (token == ACOS) {
-        resultForCalcUnary = acos(number);
-    } else if (token == ASIN) {
-        resultForCalcUnary = asin(number);
-    } else if (token == ATAN) {
-        resultForCalcUnary = atan(number);
-    } else if (token == SQRT) {
-        resultForCalcUnary = sqrt(number);
-    } else if (token == LN) {
-        resultForCalcUnary = log(number);
-    } else if (token == LOG) {
-        resultForCalcUnary = log10(number);
-    } else if (token == UMINUS) {
-        resultForCalcUnary = number * -1;
-    } else if (token == UPLUS) {
-        resultForCalcUnary = number;
+void SmartCalc::ComputeUnary(int token) {
+    auto [first, _] = result_.back();
+    result_.pop_back();
+    data resultForComputeUnary = 0;
+    static const std::map<int, func_ptr> unary_functions = {
+        {COS, cos},
+        {SIN, sin},
+        {TAN, tan},
+        {ACOS, acos},
+        {ASIN, asin},
+        {ATAN, atan},
+        {SQRT, sqrt},
+        {LN, log},
+        {LOG, log10},
+        {UMINUS, [](double x) { return -x; }},
+        {UPLUS, [](double x) { return x; }},
+    };
+    auto it = unary_functions.find(token);
+    if (it != unary_functions.end()) {
+        resultForComputeUnary = it->second(first);
+    } else {
+        throw std::out_of_range("Out of range !");
     }
-    stackRes_.push_back(std::make_pair(resultForCalcUnary, NUMBER));
+    result_.push_back(std::make_pair(resultForComputeUnary, NUMBER));
 }
 
-smartCalc::data smartCalc::getPolishNotationX(std::string &str, data x) {
-    alhoritmTransferToPN(str);
-    std::deque<std::pair<double, int>> items(stackNUM_);
+SmartCalc::data SmartCalc::ComputPolishNotation(std::string &str, data x) {
+    PolishNotation(str);
+    std::deque<std::pair<double, int>> items(numbers_);
     for (auto &item : items) {
         if (item.second == NUMBER) {
-            stackRes_.push_back(std::make_pair(item.first, NUMBER));
+            result_.push_back(std::make_pair(item.first, NUMBER));
         } else if (item.first >= PLUS && item.first <= MOD) {
-            if (stackRes_.size() < 2) error("Error calculation !");
-            calcBinary(item.first);
+            if (result_.size() < 2) Error("Error calculation !");
+            ComputeBinary(item.first);
         } else if (item.first >= COS && item.first <= LN) {
-            if (stackRes_.size() < 1) error("Error calculation !");
-            calcUnary(item.first);
+            if (result_.size() < 1) Error("Error calculation !");
+            ComputeUnary(item.first);
         } else if (item.second == X) {
-            stackRes_.push_back(std::make_pair(x, NUMBER));
+            result_.push_back(std::make_pair(x, NUMBER));
         }
     }
-    stackNUM_.clear();
+    numbers_.clear();
     data result = 0;
-    if (stackRes_.size() > 1 || stackRes_.empty()) error("Error calculation !");
-    result = stackRes_.back().first;
+    if (result_.size() > 1 || result_.empty()) Error("Error calculation !");
+    result = result_.back().first;
     clean();
     return result;
 }
 
-void smartCalc::clean() {
-    stackNUM_.clear();
-    stackOP_.clear();
-    stackRes_.clear();
+void SmartCalc::clean() {
+    numbers_.clear();
+    operations_.clear();
+    result_.clear();
     it_ = 0;
 }
 

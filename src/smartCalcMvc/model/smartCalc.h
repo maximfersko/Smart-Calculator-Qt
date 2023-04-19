@@ -7,6 +7,8 @@
 #include <deque>
 #include <iostream>
 #include <vector>
+#include <unordered_map>
+#include <map>
 #include <limits>
 
 namespace model {
@@ -40,38 +42,47 @@ enum { CONST_E = 19, CONST_PI, NUMBER, UNDEFUIEND, OPERATION, EMPTY };
 
 enum { LOW = 1, MID, HIGH, VHIGH, VVHIGH };
 
-class smartCalc {
+class SmartCalc {
    public:
     using data = double;
-    using stackOperation = std::deque<std::pair<int, int>>;
-    using stackNumber = std::deque<std::pair<data, int>>;
+    using operation = std::deque<std::pair<int, int>>;
+    using number = std::deque<std::pair<data, int>>;
+    using func_ptr = double (*)(double);
 
    private:
-    stackOperation stackOP_;
-    stackNumber stackNUM_;
-    stackNumber stackRes_;
+    const std::unordered_map<std::string, int> elements_{
+        {"+", PLUS}, {"-", MINUS},   {"/", DIV},          {"*", MULT},
+        {"%", MOD},  {"^", POW},     {"(", OPEN_BRACKET}, {")", CLOSE_BRACKET},
+        {"c", COS},  {"s", SIN},     {"a", ACOS},         {"l", LN},
+        {"x", X},    {"e", CONST_E}, {"p", CONST_PI},     {"t", TAN},
+        {".", DOT}};
+
+   private:
+    operation operations_;
+    number numbers_;
+    number result_;
     size_t it_ = 0;
 
-    void alhoritmAddOperationStack(int token);
-    void alhoritmAddBracketsStack();
-    void transferStack();
-    void check(std::string &str);
-    int stringToToken(std::string &str, bool *flag, std::vector<std::pair<char, int>> &elements);
-    void alhoritmTransferToPN(std::string &str);
-    data getNumToString(std::string &str, data value, size_t *length);
-    int getRange(int operation);
-    void calcBinary(int token);
-    void calcUnary(int token);
-    int isUnarOrBinar(int type, bool flag);
-    int checkFunction(std::string &str, int type);
-    data getPolishNotationX(std::string &str, data x); 
-    void validateRPN(const stackNumber &A);
-    double calcPloting(std::string, data X);
-    void shift(int token);
-    void error(std::string str);
+    void AddOperation(int token);
+    void AddBrackets();
+    void TransferData();
+    void ValidateBrackets(std::string &str);
+    int ExtractTokenFromStr(std::string &str, bool *flag);
+    void PolishNotation(std::string &str);
+    data ExtractNumFromStr(std::string &str, data value, size_t *length);
+    int GetPriority(int operation);
+    void ComputeBinary(int token);
+    void ComputeUnary(int token);
+    int IsUnarOrBinar(int type, bool flag);
+    int GetTypeFunction(std::string &str, int type);
+    data ComputPolishNotation(std::string &str, data x); 
+    void Validate(const number &A);
+    void ShiftIterator(int token);
+    void Error(std::string str);
+
    public:
-    smartCalc() {}
-    ~smartCalc() {}
+    SmartCalc() {}
+    ~SmartCalc() {}
     void clean();
     data RPN(std::string str);
     data RPN(std::string str, data X);
