@@ -75,7 +75,7 @@ class SmartCalc {
     void ComputeUnary(int token);
     int IsUnarOrBinar(int type, bool flag);
     int GetTypeFunction(std::string &str, int type);
-    data ComputPolishNotation(std::string &str, data x); 
+    data ComputePolishNotation(std::string &str, data x); 
     void Validate(const number &A);
     void ShiftIterator(int token);
     void Error(std::string str);

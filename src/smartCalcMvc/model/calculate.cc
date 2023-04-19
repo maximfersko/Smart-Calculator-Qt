@@ -3,11 +3,11 @@
 namespace model {
 
 typename SmartCalc::data SmartCalc::RPN(std::string str) {
-    return ComputPolishNotation(str, 0);
+    return ComputePolishNotation(str, 0);
 }
 
 typename SmartCalc::data SmartCalc::RPN(std::string str, data X) {
-    return ComputPolishNotation(str, X);
+    return ComputePolishNotation(str, X);
 }
 
 void SmartCalc::ComputeBinary(int token) {
@@ -66,7 +66,7 @@ void SmartCalc::ComputeUnary(int token) {
     result_.push_back(std::make_pair(resultForComputeUnary, NUMBER));
 }
 
-SmartCalc::data SmartCalc::ComputPolishNotation(std::string &str, data x) {
+SmartCalc::data SmartCalc::ComputePolishNotation(std::string &str, data x) {
     PolishNotation(str);
     std::deque<std::pair<double, int>> items(numbers_);
     for (auto &item : items) {
