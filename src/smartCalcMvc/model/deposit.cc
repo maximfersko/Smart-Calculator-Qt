@@ -2,53 +2,56 @@
 
 namespace model {
 
-void deposit::calculateDeposit(double amount, double period, double rate,
-                               bool capitalization, double taxRate,
-                               int replCount, double replAmount,
-                               int withdrCount, double withdrAmount) {
-    depAmount_ = 0.0;
-    depTax_ = 0.0;
-    depInterest_ = 0.0;
-    if (amount < 0 || period < 0)
-        throw std::invalid_argument("Error! Incorrect parameters");
-    double monthRate = (((amount / 100.0) * rate) / 12.0);
-    int tmpRate = 0;
-    if (!capitalization) {
-        if (withdrCount != 0 || replCount != 0) {
-            double tmp = amount;
-            depInterest_ = ((((tmp / 100) * rate) / 12) * period);
-            for (int i = 1; i <= period; ++i) {
-                tmpRate += depInterest_;
-                if (replAmount > 0 && i % replCount == 0) amount += replAmount;
-                if (withdrAmount > 0 && i % withdrCount == 0)
-                    amount -= withdrAmount;
-            }
-            depInterest_ -= ((tmp / 100 / 365) * 2);
-            depAmount_ = amount;
-        } else {
-            depInterest_ = (((amount / 100.0) * rate) / 12.0) * period;
-            depAmount_ = amount;
-        }
+void deposit::calculateDeposit(DepositData &params) {
+  depAmount_ = 0.0;
+  depTax_ = 0.0;
+  depInterest_ = 0.0;
+  if (params.amount < 0 || params.period < 0)
+    throw std::invalid_argument("Error! Incorrect parameters");
+  double monthRate = (((params.amount / 100.0) * params.rate) / 12.0);
+  int tmpRate = 0;
+  if (!params.capitalization) {
+    if (params.withdrCount != 0 || params.replCount != 0) {
+      double tmp = params.amount;
+      depInterest_ = ((((tmp / 100) * params.rate) / 12) * params.period);
+      for (int i = 1; i <= params.period; ++i) {
         tmpRate += depInterest_;
+        if (params.replAmount > 0 && i % params.replCount == 0)
+          params.amount += params.replAmount;
+        if (params.withdrAmount > 0 && i % params.withdrCount == 0)
+          params.amount -= params.withdrAmount;
+      }
+      depInterest_ -= ((tmp / 100 / 365) * 2);
+      depAmount_ = params.amount;
     } else {
-        double monthTax = 0;
-        double tmp = amount;
-        for (int i = 0; i <= period; ++i) {
-            monthRate = ((((tmp / 100.0) * rate) / 12.0));
-            monthTax = monthRate * (taxRate / 100.0);
-            tmp += monthRate;
-            tmpRate += monthTax;
-            if (replAmount > 0 && i % replCount == 0) tmp += replAmount;
-            if (withdrAmount > 0 && i % withdrCount == 0) tmp -= withdrAmount;
-            depInterest_ += monthRate, depInterest_ -= (amount / 100 / 365);
-            depAmount_ -= (amount / 100 / 365);
-        }
-        depInterest_ -= monthRate;
-        depInterest_ -= ((amount / 100 / 365));
-        depAmount_ = ((tmp - monthRate) + withdrAmount - replAmount) -
-                     ((amount / 100 / 365) * 2);
+      depInterest_ =
+          (((params.amount / 100.0) * params.rate) / 12.0) * params.period;
+      depAmount_ = params.amount;
     }
-    depTax_ = tmpRate * taxRate;
+    tmpRate += depInterest_;
+  } else {
+    double monthTax = 0;
+    double tmp = params.amount;
+    for (int i = 0; i <= params.period; ++i) {
+      monthRate = ((((tmp / 100.0) * params.rate) / 12.0));
+      monthTax = monthRate * (params.taxRate / 100.0);
+      tmp += monthRate;
+      tmpRate += monthTax;
+      if (params.replAmount > 0 && i % params.replCount == 0)
+        tmp += params.replAmount;
+
+      if (params.withdrAmount > 0 && i % params.withdrCount == 0)
+        tmp -= params.withdrAmount;
+
+      depInterest_ += monthRate, depInterest_ -= (params.amount / 100 / 365);
+      depAmount_ -= (params.amount / 100 / 365);
+    }
+    depInterest_ -= monthRate;
+    depInterest_ -= ((params.amount / 100 / 365));
+    depAmount_ = ((tmp - monthRate) + params.withdrAmount - params.replAmount) -
+                 ((params.amount / 100 / 365) * 2);
+  }
+  depTax_ = tmpRate * params.taxRate;
 }
 
-};  // namespace model
+}; // namespace model

@@ -8,6 +8,14 @@ CONFIG += c++17
 # In order to do so, uncomment the following line.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
+#macx {
+#    QMAKE_RPATHDIR += /opt/homebrew/opt/qt/lib/QtCore.framework/Versions/A/QtCore
+#    QMAKE_RPATHDIR += /opt/homebrew/opt/qt/lib/QtGui.framework/Versions/A/QtGui
+#    QMAKE_RPATHDIR += /opt/homebrew/opt/qt/lib/QtWidgets.framework/Versions/A/QtWidgets
+#    QMAKE_RPATHDIR += /opt/homebrew/opt/qt/lib/QtPrintSupport.framework/Versions/A/QtPrintSupport
+#    QMAKE_LFLAGS_RPATH += $$QMAKE_RPATHDIR
+#}
+
 SOURCES += \
     controller/controller.cc \
     model/deposit.cc \

@@ -27,8 +27,10 @@ void depositcalc::on_calculate_clicked()
     double refillsDate = ui->refill->value();
     double withdrawSumma = ui->withdrawSumma->value();
     double withdrawDate = ui->withdraw->value();
-
-    dep_->SetParam(summa, period, persent, isCapitalization, true, refillsDate, refillsSumma,withdrawDate, withdrawSumma);
+    model::DepositData params(summa, period, persent,
+      isCapitalization, true, refillsDate,
+      refillsSumma, withdrawDate, withdrawSumma);
+    dep_->SetParam(params);
     ui->totalSum->setText(QString::number(dep_->getAmountTotalDeposit()));
     ui->totalrRate->setText(QString::number(dep_->getInterestDeposit()));
     ui->totalTaxRate->setText(QString::number(dep_->getTax()));

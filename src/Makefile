@@ -1,4 +1,5 @@
 SRC         =     $(foreach dir, $(SOURCEDIR), $(wildcard $(dir)/*.cc))
+HEADER      =     $(foreach dir, $(SOURCEDIR), $(wildcard $(dir)/*.h))
 CC          =     g++ -std=c++17
 LIBCHECK    =     -lgtest
 TESTF       =     test.cc $(SRC)
@@ -37,4 +38,4 @@ leaks: clean
 	leaks  -atExit -- ./leaks
 
 lint:
-	clang-format -i --verbose $(SRC)
+	clang-format -i --verbose $(SRC) $(HEADER) smartCalcMvc/controller/*
