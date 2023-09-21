@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>credit</class>
+ <widget class="QWidget" name="credit">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>308</width>
+    <height>267</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>308</width>
+    <height>267</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>308</width>
+    <height>267</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="QLabel" name="label_2">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>40</y>
+     <width>141</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>15</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Loan Term (months)</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="overPay">
+   <property name="geometry">
+    <rect>
+     <x>160</x>
+     <y>160</y>
+     <width>141</width>
+     <height>21</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QRadioButton" name="diff">
+   <property name="geometry">
+    <rect>
+     <x>160</x>
+     <y>100</y>
+     <width>121</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>15</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Differentiation</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="monthlyPay">
+   <property name="geometry">
+    <rect>
+     <x>160</x>
+     <y>130</y>
+     <width>141</width>
+     <height>21</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="p">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>10</y>
+     <width>91</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>15</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Loan Amount</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_4">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>160</y>
+     <width>101</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>15</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Over Payment</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_5">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>190</y>
+     <width>101</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>15</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Total Payment</string>
+   </property>
+  </widget>
+  <widget class="QRadioButton" name="annuity">
+   <property name="geometry">
+    <rect>
+     <x>50</x>
+     <y>100</y>
+     <width>71</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>15</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Annuity</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_7">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>130</y>
+     <width>121</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>15</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Monthly Payment</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="calc">
+   <property name="geometry">
+    <rect>
+     <x>80</x>
+     <y>220</y>
+     <width>141</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>15</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton {
+  background-color: rgb(255, 149, 58);
+
+     border-width: 2px;
+     border-radius: 10px;
+ 
+}
+QPushButton:pressed {
+    background-color:  rgb(255, 143, 50);
+}</string>
+   </property>
+   <property name="text">
+    <string>Calculate</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_3">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>70</y>
+     <width>91</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>15</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Interest Rate</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="totalPay">
+   <property name="geometry">
+    <rect>
+     <x>160</x>
+     <y>190</y>
+     <width>141</width>
+     <height>21</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QDoubleSpinBox" name="period">
+   <property name="geometry">
+    <rect>
+     <x>160</x>
+     <y>40</y>
+     <width>141</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="decimals">
+    <number>4</number>
+   </property>
+   <property name="maximum">
+    <double>1000.000000000000000</double>
+   </property>
+   <property name="singleStep">
+    <double>2.000000000000000</double>
+   </property>
+  </widget>
+  <widget class="QDoubleSpinBox" name="present">
+   <property name="geometry">
+    <rect>
+     <x>160</x>
+     <y>70</y>
+     <width>141</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="decimals">
+    <number>4</number>
+   </property>
+   <property name="maximum">
+    <double>200.000000000000000</double>
+   </property>
+   <property name="singleStep">
+    <double>5.000000000000000</double>
+   </property>
+  </widget>
+  <widget class="QDoubleSpinBox" name="summa">
+   <property name="geometry">
+    <rect>
+     <x>160</x>
+     <y>10</y>
+     <width>141</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="decimals">
+    <number>4</number>
+   </property>
+   <property name="maximum">
+    <double>100000000.000000000000000</double>
+   </property>
+   <property name="singleStep">
+    <double>500.000000000000000</double>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

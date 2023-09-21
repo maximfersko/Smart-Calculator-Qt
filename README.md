@@ -11,13 +11,13 @@ $ make install
 Main Calculator
 ---------------
 
-### Smart calculator - divided into three blocks. This calculator - calculates arithmetic and binary operations with numbers, graph builder - builds a graph according to a given expression, credit calculator - has two types of credit: annuity, differentiated.
+ Smart calculator - divided into three blocks. This calculator - calculates arithmetic and binary operations with numbers, graph builder - builds a graph according to a given expression, credit calculator - has two types of credit: annuity, differentiated.
 
 ![](images/calc.gif)
 
 ### HOW TO USE:
 
-### All buttons of the screen are active.The calculation of the expression you entered is done by pressing the "=" button.When you enter x and press =, a dialog box will appear and ask you to drive the number to replace x.
+All buttons of the screen are active.The calculation of the expression you entered is done by pressing the "=" button.When you enter x and press =, a dialog box will appear and ask you to drive the number to replace x.
 
 ### Operators
 
